@@ -19,6 +19,10 @@ FROM ghcr.io/ublue-os/bazzite-nvidia-open:stable
 
 COPY --from=it87-build /it87-root/ /
 
+# Chrome installs its immutable payload below /opt. Bazzite normally points
+# /opt at writable /var/opt, so replace only that image-local symlink.
+RUN if [ -L /opt ]; then unlink /opt; fi && mkdir -p /opt
+
 RUN --mount=type=bind,from=build-context,source=/,target=/ctx,ro \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
