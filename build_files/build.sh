@@ -9,6 +9,7 @@ cp -a /ctx/system_files/. /
 dnf5 install -y \
 	chatgpt \
 	coolercontrol \
+	coolercontrold \
 	displaylink \
 	google-chrome-stable \
 	liquidctl
